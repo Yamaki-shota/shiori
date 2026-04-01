@@ -2,16 +2,8 @@
 <html lang="ja" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <!-- モバイルファーストの極意1：ピンチズームを防ぎ、iPhoneのノッチやホームバー領域（Safe Area）を認識させる -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>NEW YORK TRIP</title>
-  
-  <!-- 先読み処理（軽量化の極意：フォントや外部画像のサーバーへ事前に接続要求を出して爆速化） -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
-
-  <!-- スタイル（Tailwind CSS） -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
@@ -20,17 +12,17 @@
       font-family: 'Poppins', 'Noto Sans JP', sans-serif;
       background-color: #f8fafc;
       color: #1e293b;
-      /* iPhoneのホームバー領域を確保 */
-      padding-bottom: env(safe-area-inset-bottom);
     }
     
-    .yellow-cab { background-color: #facc15; }
+    .yellow-cab {
+      background-color: #facc15;
+    }
     
     /* アニメーション */
     .fade-in-up {
-      animation: fadeInUp 0.5s ease-out forwards;
+      animation: fadeInUp 0.6s ease-out forwards;
       opacity: 0;
-      transform: translateY(15px);
+      transform: translateY(20px);
     }
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
@@ -40,17 +32,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* リンクスタイル */
+    /* リンクスタイル（一番使いやすい📍スタイル） */
     .spot-link {
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
       color: #2563eb;
-      font-weight: 600;
+      font-weight: 700;
     }
-    .spot-link:hover { color: #1d4ed8; text-decoration: underline; }
-    .spot-link::before { content: '📍'; font-size: 0.9em; }
+    .spot-link:hover { color: #1d4ed8; text-decoration: underline; text-underline-offset: 2px; }
+    .spot-link::before { content: '📍'; font-size: 0.9em; text-decoration: none; }
 
     /* グラスモーフィズム */
     .glass-card {
@@ -59,19 +51,20 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     }
 
-    /* 横スクロールバー非表示（スワイプ特化） */
+    /* 横スクロールバー非表示 */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ナビゲーションのトランジション */
     .nav-link { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
 </head>
-<body class="antialiased selection:bg-yellow-200 selection:text-slate-900">
+<body class="antialiased pb-20 selection:bg-yellow-200 selection:text-slate-900">
 
   <!-- ヘッダー -->
   <header class="relative bg-slate-900 text-white overflow-hidden shadow-lg fade-in-up">
-    <!-- 軽量化の極意2：画像をWebP化し、横幅を800pxに制限してデータ量を約80%削減 -->
-    <div class="absolute inset-0 opacity-30 bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=50&fm=webp');"></div>
-    <div class="relative z-10 px-6 py-10 md:py-12 text-center">
+    <div class="absolute inset-0 opacity-30 bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80');"></div>
+    <div class="relative z-10 px-6 py-12 text-center">
       <span class="inline-block px-3 py-1 bg-yellow-400 text-slate-900 text-sm font-bold rounded-full mb-3 shadow-sm transform -rotate-2">2026.4.8 - 4.14</span>
       <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-2">NEW YORK TRIP</h1>
     </div>
@@ -81,7 +74,7 @@
   <!-- 日程ジャンプ用 固定ナビゲーション（目次） -->
   <nav class="sticky top-0 z-50 glass-card border-b border-slate-200 shadow-sm fade-in-up delay-1">
     <div class="max-w-3xl mx-auto px-4 py-3">
-      <ul id="nav-menu" class="flex space-x-3 overflow-x-auto no-scrollbar snap-x scroll-smooth">
+      <ul id="nav-menu" class="flex space-x-3 overflow-x-auto no-scrollbar snap-x scroll-smooth items-center">
         <li class="snap-start shrink-0"><a href="#day0" data-target="day0" class="nav-link inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-sm">DAY 0<br><span class="text-[10px] font-normal opacity-70">4/8</span></a></li>
         <li class="snap-start shrink-0"><a href="#day1" data-target="day1" class="nav-link inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-sm">DAY 1<br><span class="text-[10px] font-normal opacity-70">4/9</span></a></li>
         <li class="snap-start shrink-0"><a href="#day2" data-target="day2" class="nav-link inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-sm">DAY 2<br><span class="text-[10px] font-normal opacity-70">4/10</span></a></li>
@@ -89,6 +82,8 @@
         <li class="snap-start shrink-0"><a href="#day4" data-target="day4" class="nav-link inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-sm">DAY 4<br><span class="text-[10px] font-normal opacity-70">4/12</span></a></li>
         <li class="snap-start shrink-0"><a href="#day5" data-target="day5" class="nav-link inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-sm">DAY 5<br><span class="text-[10px] font-normal opacity-70">4/13</span></a></li>
         <li class="snap-start shrink-0"><a href="#backup" data-target="backup" class="nav-link inline-block px-4 py-2 bg-slate-800 border border-slate-800 rounded-full text-xs font-bold text-white shadow-sm">🍽️ BACKUP<br><span class="text-[10px] font-normal opacity-70">予備店</span></a></li>
+        <!-- MISSIONS を最後に移動 -->
+        <li class="snap-start shrink-0"><a href="#missions" data-target="missions" class="nav-link inline-block px-4 py-2 bg-red-600 border border-red-600 rounded-full text-xs font-bold text-white shadow-sm ml-2">🔥 MISSIONS<br><span class="text-[10px] font-normal opacity-90">出発前準備</span></a></li>
       </ul>
     </div>
   </nav>
@@ -98,389 +93,609 @@
     <!-- 天気と持ち物リスト -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 fade-in-up delay-2">
       <!-- 天気 -->
-      <div class="glass-card rounded-2xl p-4 md:p-5 border border-slate-100">
-        <h2 class="text-base md:text-lg font-bold flex items-center gap-2 mb-2">
+      <div class="glass-card rounded-2xl p-5 border border-slate-100">
+        <h2 class="text-lg font-bold flex items-center gap-2 mb-3">
           <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
           気候＆天気メモ
         </h2>
-        <p class="text-xs md:text-sm text-slate-600 mb-2">4月のNYは寒暖差激しめ。重ね着推奨。</p>
-        <ul class="text-xs md:text-sm space-y-1 text-slate-700 font-medium">
-          <li>🌡️ 最高: 15℃前後 / 最低: 5℃前後</li>
-          <li>🧥 コート、薄手ダウン、パーカー</li>
+        <p class="text-sm text-slate-600 mb-2">4月のNYは寒暖差が激しいです。重ね着できる服装がおすすめ。</p>
+        <ul class="text-sm space-y-1 text-slate-700 font-medium">
+          <li>🌡️ 最高気温: 15℃前後 / 最低気温: 5℃前後</li>
+          <li>🧥 トレンチコート、薄手ダウン、パーカー</li>
         </ul>
       </div>
       <!-- 持ち物 -->
-      <div class="glass-card rounded-2xl p-4 md:p-5 border border-slate-100">
-        <h2 class="text-base md:text-lg font-bold flex items-center gap-2 mb-2">
-          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+      <div class="glass-card rounded-2xl p-5 border border-slate-100">
+        <h2 class="text-lg font-bold flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
           持ち物リスト
         </h2>
-        <ul class="text-xs md:text-sm space-y-2 text-slate-700">
-          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> パスポート・航空券・ESTA</li>
-          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> クレジットカード・現金</li>
-          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> SIM / モバイルバッテリー</li>
+        <ul class="text-sm space-y-2 text-slate-700 font-medium">
+          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> パスポート・航空券</li>
+          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> クレジットカード・少しの現金</li>
+          <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> モバイルバッテリー (超重要)</li>
           <li class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 accent-slate-800 rounded"> 常備薬・歩きやすい靴</li>
         </ul>
       </div>
     </div>
 
-    <!-- Googleマップ アプリ起動ボタン -->
-    <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-100 fade-in-up delay-3 text-center">
-      <h2 class="text-base md:text-lg font-bold flex items-center justify-center gap-2 mb-2">
-        <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 17.618V6.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
-        MY TRAVEL MAP
+    <!-- MY TRAVEL MAP ボタン -->
+    <div class="glass-card rounded-2xl p-5 border border-slate-100 fade-in-up delay-3 text-center">
+      <h2 class="text-lg font-bold flex items-center justify-center gap-2 mb-2 text-slate-800">
+        🗺️ MY TRAVEL MAP
       </h2>
-      <p class="text-xs md:text-sm text-slate-600 mb-4 font-medium">NY旅行のために保存したピンをマップで確認！</p>
-      
-      <!-- いただいた共有リンクをセット -->
-      <a href="https://maps.app.goo.gl/U2F4dudapPQewsGg7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-3.5 bg-slate-800 text-white text-sm md:text-base font-bold rounded-xl shadow-md hover:bg-slate-700 hover:scale-[1.02] transition-transform">
-        🗺️ スマホのGoogleマップアプリで開く
+      <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">NY旅行のために保存したピンをマップで確認！</p>
+      <a href="https://maps.app.goo.gl/U2F4dudapPQewsGg7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-3.5 bg-slate-800 text-white text-sm md:text-base font-bold rounded-xl shadow-md hover:bg-slate-700 hover:shadow-lg transition-all">
+        スマホのGoogleマップアプリで開く
       </a>
     </div>
 
-    <!-- 日程表 -->
-    <div class="fade-in-up delay-3 space-y-12 md:space-y-16 mt-8">
+    <!-- 日程表 (Itinerary) -->
+    <div class="fade-in-up delay-3 space-y-16 mt-12">
 
       <!-- DAY 0 -->
-      <div id="day0" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 0 ｜ 4/8(水) 到着</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">NY到着と少しだけタイムズスクエア</p>
+      <div id="day0" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 0 ｜ 4/8(水) 到着</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">NY到着と少しだけタイムズスクエア</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">18:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport" target="_blank" class="spot-link">JFK到着</a></p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">20:00前後</div>
-            <div class="text-sm md:text-base">
-              <p>空港出発</p>
-              <p class="text-[11px] md:text-xs text-slate-500 mt-1">電車なら AirTrain + 地下鉄 で約1.5時間、$11.75/人</p>
+        <div class="relative">
+          <!-- 路線図の縦線 -->
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">18:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport" target="_blank" class="spot-link">JFK到着</a></p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">21:30前後</div>
-            <div class="text-sm md:text-base"><p>ホテル着</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">22:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=The+Halal+Guys+New+York" target="_blank" class="spot-link text-orange-600">ザ・ハラルガイズ</a>で夜ごはん 🥙</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">22:30-23:00</div>
-            <div class="text-sm md:text-base">
-              <p><a href="https://www.google.com/maps/search/?api=1&query=Times+Square+New+York" target="_blank" class="spot-link">タイムズスクエア</a>を少しだけ見る</p>
-              <p class="text-xs text-rose-500 font-bold mt-1">※早めに切り上げる！</p>
+            
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">20:00前後</div>
+                <div>
+                  <p class="font-bold text-slate-700">空港出発</p>
+                  <p class="text-xs text-slate-500 mt-1">電車なら AirTrain + 地下鉄 で約1.5時間、$11.75/人</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <!-- 予備枠 -->
-          <div class="mt-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 shadow-inner">
-            <p class="font-bold flex items-center gap-1 text-slate-800">
-              <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              予備プラン
-            </p>
-            <ul class="mt-1 space-y-1 ml-5 list-disc text-slate-600">
-              <li>ハラルガイズが行列なら <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="underline font-bold text-slate-800">Joe's Pizza</a> 🍕</li>
-              <li>座って食べたくなったら <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="underline font-bold text-slate-800">Junior's</a> 🍰</li>
-            </ul>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">21:30前後</div>
+                <div><p class="font-bold text-slate-700">ホテル着</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">22:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=The+Halal+Guys+New+York" target="_blank" class="spot-link !text-orange-600">ザ・ハラルガイズ</a> で夜ごはん 🥙</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">22:30-23:00</div>
+                <div>
+                  <p><a href="https://www.google.com/maps/search/?api=1&query=Times+Square+New+York" target="_blank" class="spot-link">タイムズスクエア</a> を少しだけ見る</p>
+                  <p class="text-xs text-rose-500 font-bold mt-1">※早めに切り上げる！</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 予備枠 (ノードなし) -->
+            <div class="relative pl-8">
+              <div class="mt-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-sm text-slate-700 shadow-inner">
+                <p class="font-bold flex items-center gap-1 text-slate-800">
+                  <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  予備プラン
+                </p>
+                <ul class="mt-1 space-y-1 ml-5 list-disc text-slate-600 font-medium">
+                  <li>行列なら <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="text-blue-600 font-bold hover:underline">Joe's Pizza</a> 🍕</li>
+                  <li>座りたくなったら <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="text-blue-600 font-bold hover:underline">Junior's</a> 🍰</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DAY 1 -->
-      <div id="day1" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 1 ｜ 4/9(木)</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">Brooklyn Bridge → DUMBO → Lower Manhattan → Harbor Lights</p>
+      <div id="day1" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 1 ｜ 4/9(木)</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">Brooklyn Bridge → DUMBO → Lower Manhattan → Harbor Lights</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">08:00</div>
-            <div class="text-sm md:text-base"><p>ホテル出発</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">08:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=City+Hall+Park+New+York" target="_blank" class="spot-link">City Hall Park</a></p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">08:45-09:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge" target="_blank" class="spot-link">Brooklyn Bridge</a>を歩く 🚶</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">09:30-11:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=DUMBO+Brooklyn" target="_blank" class="spot-link">DUMBO</a>散策</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">11:45</div>
-            <div class="text-sm md:text-base"><p>DUMBOで軽めランチ 🥪</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">13:00前後</div>
-            <div class="text-sm md:text-base"><p>NYC Ferryで <a href="https://www.google.com/maps/search/?api=1&query=Pier+11+Wall+St+New+York" target="_blank" class="spot-link">Pier 11</a>へ ⛴</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">13:30-14:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=9%2F11+Memorial+New+York" target="_blank" class="spot-link">9/11 Memorial</a> (屋外だけ)</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">14:30-16:30</div>
-            <div class="text-sm md:text-base"><p>Lower Manhattanを軽く散歩</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-emerald-50 p-3 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">17:00以降</div>
-            <div class="text-sm md:text-base">
-              <p class="font-bold text-emerald-700">フリー ☕</p>
-              <p class="text-xs text-emerald-600 mt-1">小腹が空いたら <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="font-bold underline">Scarr's Pizza</a> を候補に。</p>
+        <div class="relative">
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:00</div>
+                <div><p class="font-bold text-slate-700">ホテル出発</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">18:15-18:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Pier+83+New+York" target="_blank" class="spot-link">Pier 83</a>へ移動</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-yellow-400 shrink-0">19:00-21:00</div>
-            <div class="text-sm md:text-base"><p>🌉 Harbor Lights Cruise</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">21:30前後</div>
-            <div class="text-sm md:text-base"><p>ホテルへ戻る</p></div>
-          </div>
-          <!-- メモ枠 -->
-          <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-xs md:text-sm text-blue-800 shadow-inner">
-            <p class="font-bold flex items-center gap-1">
-              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              MEMO
-            </p>
-            <p class="mt-1 ml-5">Katz's はこの日に入れない。重いし船前のご飯じゃない！<br>Katz's は最終日の本命に回す。</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=City+Hall+Park+New+York" target="_blank" class="spot-link">City Hall Park</a></p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:45-09:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge" target="_blank" class="spot-link">Brooklyn Bridge</a> を歩く 🚶</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">09:30-11:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=DUMBO+Brooklyn" target="_blank" class="spot-link">DUMBO</a> 散策</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">11:45</div>
+                <div><p class="font-bold text-slate-700">DUMBOで軽めランチ 🥪</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:00前後</div>
+                <div><p class="font-bold text-slate-700">NYC Ferryで <a href="https://www.google.com/maps/search/?api=1&query=Pier+11+Wall+St+New+York" target="_blank" class="spot-link">Pier 11</a> へ ⛴</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:30-14:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=9%2F11+Memorial+New+York" target="_blank" class="spot-link">9/11 Memorial</a> (屋外だけ)</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">14:30-16:30</div>
+                <div><p class="font-bold text-slate-700">Lower Manhattanを軽く散歩</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-emerald-50 p-3 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">17:00以降</div>
+                <div>
+                  <p class="font-bold text-emerald-700">フリータイム ☕</p>
+                  <p class="text-xs text-emerald-600 mt-1">小腹が空いたら <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="font-bold underline">Scarr's Pizza</a> を候補に。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">18:15-18:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Pier+83+New+York" target="_blank" class="spot-link">Pier 83</a> へ移動</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-yellow-400 shrink-0">19:00-21:00</div>
+                <div><p class="font-bold tracking-wide text-lg">🌉 Harbor Lights Cruise</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">21:30前後</div>
+                <div><p class="font-bold text-slate-700">ホテルへ戻る</p></div>
+              </div>
+            </div>
+
+            <!-- メモ枠 -->
+            <div class="relative pl-8">
+              <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800 shadow-inner">
+                <p class="font-bold flex items-center gap-1">
+                  <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  MEMO
+                </p>
+                <p class="mt-1 ml-5 font-medium">Katz's はこの日に入れない。重いし、船前にやる飯じゃない！<br>Katz's は最終日の本命に回す。</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DAY 2 -->
-      <div id="day2" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 2 ｜ 4/10(金)</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">Central Park → Met → Midtown → ESB</p>
+      <div id="day2" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 2 ｜ 4/10(金)</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">Central Park → Met → Midtown → ESB</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">08:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Central+Park+New+York" target="_blank" class="spot-link">セントラルパーク</a>散歩 🌳</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">09:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Lexington+Candy+Shop+New+York" target="_blank" class="spot-link">Lexington Candy Shop</a> 🥞</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-rose-50 p-3 rounded-xl shadow-sm border border-rose-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">10:15-13:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=The+Metropolitan+Museum+of+Art+New+York" target="_blank" class="spot-link text-rose-700">メトロポリタン美術館</a> 🎨</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">13:45</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Gallaghers+Steakhouse+New+York" target="_blank" class="spot-link">Gallaghers Steakhouse</a>でランチ 🥩</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">15:00-17:30</div>
-            <div class="text-sm md:text-base"><p>5番街 / Grand Central / Bryant Park 周辺</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">16:00ごろ</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Grumpy+Grand+Central+New+York" target="_blank" class="spot-link">Cafe Grumpy</a> でコーヒー ☕</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">19:00</div>
-            <div class="text-sm md:text-base"><p>軽めの夜ごはん</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-yellow-400 shrink-0">21:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Empire+State+Building+New+York" target="_blank" class="spot-link text-yellow-300">Empire State Building</a> 🏙️</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">22:30前後</div>
-            <div class="text-sm md:text-base"><p>ホテルへ戻る</p></div>
-          </div>
-          <!-- 夜ごはん候補枠 -->
-          <div class="mt-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 shadow-inner">
-            <p class="font-bold flex items-center gap-1 text-slate-800">
-              <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-              夜ごはん候補
-            </p>
-            <ul class="mt-1 space-y-1 ml-5 list-disc text-slate-600">
-              <li>サクッとなら <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="underline font-bold text-slate-800">Joe's Pizza</a> 🍕</li>
-              <li>コーヒーだけなら <a href="https://www.google.com/maps/search/?api=1&query=Joe+Coffee+Bryant+Park+New+York" target="_blank" class="underline font-bold text-slate-800">Joe Coffee Bryant Park</a> ☕</li>
-            </ul>
+        <div class="relative">
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Central+Park+New+York" target="_blank" class="spot-link !text-emerald-600">セントラルパーク</a> 散歩 🌳</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">09:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Lexington+Candy+Shop+New+York" target="_blank" class="spot-link">Lexington Candy Shop</a> 🥞</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-rose-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-rose-50 p-3 rounded-xl shadow-sm border border-rose-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">10:15-13:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=The+Metropolitan+Museum+of+Art+New+York" target="_blank" class="spot-link !text-rose-600">メトロポリタン美術館</a> 🎨</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:45</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Gallaghers+Steakhouse+New+York" target="_blank" class="spot-link">Gallaghers Steakhouse</a> でランチ 🥩</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">15:00-17:30</div>
+                <div><p class="font-bold text-slate-700">5番街 / Grand Central / Bryant Park 周辺</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">16:00ごろ</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Grumpy+Grand+Central+New+York" target="_blank" class="spot-link">Cafe Grumpy - Grand Central</a> でコーヒー休憩 ☕</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">19:00</div>
+                <div><p class="font-bold text-slate-700">軽めの夜ごはん</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-yellow-400 shrink-0">21:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Empire+State+Building+New+York" target="_blank" class="spot-link !text-yellow-400">Empire State Building</a> 🏙️</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">22:30前後</div>
+                <div><p class="font-bold text-slate-700">ホテルへ戻る</p></div>
+              </div>
+            </div>
+
+            <!-- 夜ごはん候補枠 -->
+            <div class="relative pl-8">
+              <div class="mt-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-sm text-slate-700 shadow-inner">
+                <p class="font-bold flex items-center gap-1 text-slate-800">
+                  <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                  夜ごはん候補
+                </p>
+                <ul class="mt-1 space-y-1 ml-5 list-disc text-slate-600 font-medium">
+                  <li>サクッとなら <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="underline font-bold text-blue-600">Joe's Pizza</a> 🍕</li>
+                  <li>コーヒーだけなら <a href="https://www.google.com/maps/search/?api=1&query=Joe+Coffee+Bryant+Park+New+York" target="_blank" class="underline font-bold text-blue-600">Joe Coffee Bryant Park</a> ☕</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DAY 3 -->
-      <div id="day3" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 3 ｜ 4/11(土)</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">West Village → High Line → Broadway → NJ</p>
+      <div id="day3" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 3 ｜ 4/11(土)</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">West Village → High Line → Chelsea → Broadway → NJ</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">朝</div>
-            <div class="text-sm md:text-base">
-              <p>ホテルチェックアウト・荷物預け</p>
-              <p class="text-[11px] md:text-xs text-slate-500 mt-1">候補: ホテル / ダメなら Bounce 495 9th Ave</p>
+        <div class="relative">
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">朝</div>
+                <div>
+                  <p class="font-bold text-slate-700">ホテルチェックアウト・荷物預け</p>
+                  <p class="text-xs text-slate-500 mt-1">候補: ホテル預かり / ダメなら Bounce 495 9th Ave</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">08:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Arcane+Estate+Coffee+New+York" target="_blank" class="spot-link">Arcane Estate Coffee</a> ☕</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">09:00-10:00</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=West+Village+New+York" target="_blank" class="spot-link">West Village</a>散策</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">10:15-11:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=The+High+Line+New+York" target="_blank" class="spot-link">High Line</a> 🌿</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-orange-600 shrink-0">11:30-12:30</div>
-            <div class="text-sm md:text-base">
-              <p><a href="https://www.google.com/maps/search/?api=1&query=Chelsea+Market+New+York" target="_blank" class="spot-link">Chelsea Market</a>でランチ</p>
-              <p class="text-xs font-bold text-orange-800 mt-1">本命は <a href="https://www.google.com/maps/search/?api=1&query=Los+Tacos+No.1+Chelsea+Market+New+York" target="_blank" class="underline">Los Tacos No.1</a> 🌮</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Arcane+Estate+Coffee+New+York" target="_blank" class="spot-link">Arcane Estate Coffee</a> ☕</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">13:00-14:00</div>
-            <div class="text-sm md:text-base"><p>元気があれば <a href="https://www.google.com/maps/search/?api=1&query=Little+Island+New+York" target="_blank" class="spot-link">Little Island</a></p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">14:30-17:00</div>
-            <div class="text-sm md:text-base"><p>休憩 or 軽く散策 🛋️</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-orange-600 shrink-0">17:30</div>
-            <div class="text-sm md:text-base">
-              <p>早め夜ごはん</p>
-              <p class="text-xs font-bold text-orange-800 mt-1">本命は <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="underline">Junior's</a> 🍰</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">09:00-10:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=West+Village+New+York" target="_blank" class="spot-link">West Village</a> 散策</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-purple-900 text-white p-4 rounded-xl shadow-md transform hover:scale-[1.02] transition">
-            <div class="w-24 text-sm font-bold text-yellow-400 shrink-0">19:15-22:30</div>
-            <div class="text-sm md:text-base">
-              <p class="text-[11px] md:text-sm text-purple-200">19:15 劇場入り</p>
-              <p class="font-extrabold text-lg md:text-xl text-yellow-400 mt-1">🧞‍♂️ 20:00〜 アラジン</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">10:15-11:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=The+High+Line+New+York" target="_blank" class="spot-link !text-emerald-600">High Line</a> 🌿</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">22:45-23:00</div>
-            <div class="text-sm md:text-base"><p>荷物回収</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-100 p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">23:00以降</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Franklin+Lakes+NJ" target="_blank" class="spot-link">Franklin Lakes, NJ</a>へ移動 🚗</p></div>
-          </div>
-          <!-- メモ枠 -->
-          <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-xs md:text-sm text-blue-800 shadow-inner">
-            <p class="font-bold flex items-center gap-1">
-              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              MEMO
-            </p>
-            <p class="mt-1 ml-5">この日はアラジンが主役。余計なものは足さない！</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-orange-600 shrink-0">11:30-12:30</div>
+                <div>
+                  <p><a href="https://www.google.com/maps/search/?api=1&query=Chelsea+Market+New+York" target="_blank" class="spot-link !text-orange-800">Chelsea Market</a> でランチ</p>
+                  <p class="text-xs font-bold text-orange-800 mt-1">本命は <a href="https://www.google.com/maps/search/?api=1&query=Los+Tacos+No.1+Chelsea+Market+New+York" target="_blank" class="underline">Los Tacos No.1</a> 🌮</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:00-14:00</div>
+                <div><p class="font-bold text-slate-700">元気があれば <a href="https://www.google.com/maps/search/?api=1&query=Little+Island+New+York" target="_blank" class="spot-link">Little Island</a></p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">14:30-17:00</div>
+                <div><p class="font-bold text-slate-700">休憩 or 軽く散策 🛋️</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-orange-600 shrink-0">17:30</div>
+                <div>
+                  <p class="font-bold text-slate-800">早め夜ごはん</p>
+                  <p class="text-xs font-bold text-orange-800 mt-1">本命は <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="underline">Junior's</a> 🍰</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-purple-500 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-purple-900 text-white p-4 rounded-xl shadow-md transform hover:scale-[1.02] transition">
+                <div class="w-24 font-bold text-yellow-400 shrink-0">19:15-22:30</div>
+                <div>
+                  <p class="text-sm text-purple-200">19:15 劇場入り</p>
+                  <p class="font-extrabold text-xl text-yellow-400 mt-1">🧞‍♂️ 20:00〜 アラジン</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">22:45-23:00</div>
+                <div><p class="font-bold text-slate-700">荷物回収</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-100 p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">23:00以降</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Franklin+Lakes+NJ" target="_blank" class="spot-link">Franklin Lakes, NJ</a> へ移動 🚗</p></div>
+              </div>
+            </div>
+
+            <!-- メモ枠 -->
+            <div class="relative pl-8">
+              <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800 shadow-inner">
+                <p class="font-bold flex items-center gap-1">
+                  <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  MEMO
+                </p>
+                <p class="mt-1 ml-5 font-medium">この日はアラジンが主役。余計なものは足さない！</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DAY 4 -->
-      <div id="day4" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 4 ｜ 4/12(日)</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">Franklin Lakes, NJ</p>
+      <div id="day4" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 4 ｜ 4/12(日)</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">Franklin Lakes, NJ</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-5 md:p-6 rounded-xl shadow-sm border border-yellow-100 text-center sm:text-left">
-            <p class="font-extrabold text-lg md:text-xl text-slate-800 mb-4">終日 友達におまかせ ✨</p>
-            <div class="flex flex-wrap gap-2 md:gap-3 justify-center sm:justify-start text-xs md:text-sm font-medium">
-              <span class="px-3 py-1.5 md:px-4 md:py-2 bg-white rounded-full shadow-sm text-slate-700">🥞 ダイナー</span>
-              <span class="px-3 py-1.5 md:px-4 md:py-2 bg-white rounded-full shadow-sm text-slate-700">🚙 ドライブ</span>
-              <span class="px-3 py-1.5 md:px-4 md:py-2 bg-white rounded-full shadow-sm text-slate-700">🛒 スーパー</span>
-              <span class="px-3 py-1.5 md:px-4 md:py-2 bg-white rounded-full shadow-sm text-slate-700">🍖 BBQ</span>
-              <span class="px-3 py-1.5 md:px-4 md:py-2 bg-white rounded-full shadow-sm text-slate-700">☕ のんびり</span>
+        <div class="relative">
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl shadow-sm border border-yellow-100 text-center sm:text-left">
+                <p class="font-extrabold text-xl text-slate-800 mb-4">終日 友達におまかせ ✨</p>
+                <div class="flex flex-wrap gap-3 justify-center sm:justify-start text-sm font-medium">
+                  <span class="px-4 py-2 bg-white rounded-full shadow-sm text-slate-700">🥞 ダイナー</span>
+                  <span class="px-4 py-2 bg-white rounded-full shadow-sm text-slate-700">🚙 郊外ドライブ</span>
+                  <span class="px-4 py-2 bg-white rounded-full shadow-sm text-slate-700">🛒 スーパー</span>
+                  <span class="px-4 py-2 bg-white rounded-full shadow-sm text-slate-700">🍖 BBQ</span>
+                  <span class="px-4 py-2 bg-white rounded-full shadow-sm text-slate-700">☕ のんびり</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <!-- メモ枠 -->
-          <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-xs md:text-sm text-blue-800 shadow-inner">
-            <p class="font-bold flex items-center gap-1">
-              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              MEMO
-            </p>
-            <ul class="mt-1 space-y-1 ml-5 list-disc text-blue-700">
-              <li>NY観光の続きじゃなくて、アメリカ郊外を味わう日でいい。</li>
-              <li>American Dream は流れがあれば行くくらいで十分。</li>
-            </ul>
+
+            <!-- メモ枠 -->
+            <div class="relative pl-8">
+              <div class="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800 shadow-inner">
+                <p class="font-bold flex items-center gap-1">
+                  <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  MEMO
+                </p>
+                <ul class="mt-1 space-y-1 ml-5 list-disc text-blue-700 font-medium">
+                  <li>NY観光の続きじゃなくて、アメリカ郊外を味わう日でいい。</li>
+                  <li>American Dream は流れがあれば行く、くらいで十分。</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DAY 5 -->
-      <div id="day5" class="scroll-section relative pl-5 md:pl-6 border-l-2 border-yellow-400 pb-4 scroll-mt-28">
-        <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
-        <h3 class="text-lg md:text-xl font-bold text-slate-800">DAY 5 ｜ 4/13(月)</h3>
-        <p class="text-xs md:text-sm text-slate-500 mb-4 font-medium">NJ → マンハッタン最終日 → JFK</p>
+      <div id="day5" class="scroll-section scroll-mt-28">
+        <h3 class="text-xl font-bold text-slate-800">DAY 5 ｜ 4/13(月)</h3>
+        <p class="text-sm text-slate-500 mb-4 font-medium">NJ → マンハッタン最終日 → JFK</p>
         
-        <div class="space-y-2 md:space-y-3">
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">10:00前後</div>
-            <div class="text-sm md:text-base"><p>マンハッタン着</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">10:15</div>
-            <div class="text-sm md:text-base">
-              <p>荷物預け</p>
-              <p class="text-[11px] md:text-xs text-slate-500 mt-1">候補: Bounce 495 9th Ave</p>
+        <div class="relative">
+          <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
+          
+          <div class="space-y-3">
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">10:00前後</div>
+                <div><p class="font-bold text-slate-700">マンハッタン着</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">午前</div>
-            <div class="text-sm md:text-base"><p>Times Square / Bryant Park などを軽く</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">10:30</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=Joe+Coffee+Bryant+Park+New+York" target="_blank" class="spot-link">Joe Coffee Bryant Park</a> で整える ☕</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-rose-50 p-3 rounded-xl shadow-sm border border-rose-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-rose-600 shrink-0">12:30</div>
-            <div class="text-sm md:text-base">
-              <p class="font-bold text-rose-800">食べ逃した本命1店 🥪</p>
-              <p class="text-xs text-rose-700 mt-1">
-                本命は <a href="https://www.google.com/maps/search/?api=1&query=Katz%27s+Delicatessen+New+York" target="_blank" class="font-bold underline text-rose-900">Katz's Delicatessen</a>
-              </p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">10:15</div>
+                <div>
+                  <p class="font-bold text-slate-700">荷物預け</p>
+                  <p class="text-xs text-slate-500 mt-1">候補: Bounce 495 9th Ave</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">午後</div>
-            <div class="text-sm md:text-base"><p>お土産・買い物・最後の散歩 🛍️</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-orange-600 shrink-0">18:00-19:00</div>
-            <div class="text-sm md:text-base">
-              <p class="font-bold text-orange-800">早め夜ごはん 🍔</p>
-              <p class="text-xs text-orange-700 mt-1">
-                本命は <a href="https://www.google.com/maps/search/?api=1&query=P.J.+Clarke%27s+Manhattan+West" target="_blank" class="font-bold underline text-orange-900">P.J. Clarke's Manhattan West</a>
-              </p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">午前</div>
+                <div><p class="font-bold text-slate-700">Times Square / Bryant Park などを軽く</p></div>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">19:30-20:00</div>
-            <div class="text-sm md:text-base"><p>荷物回収</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-slate-500 shrink-0">20:30ごろ</div>
-            <div class="text-sm md:text-base"><p>JFKへ出発 🚕</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-            <div class="w-24 text-sm font-bold text-yellow-400 shrink-0">22:00目標</div>
-            <div class="text-sm md:text-base"><p><a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport" target="_blank" class="spot-link text-yellow-200">JFK到着</a> ✈️</p></div>
-          </div>
-          <div class="mt-6 pt-6 border-t border-slate-200 text-center">
-            <p class="font-extrabold text-base md:text-lg text-slate-700">翌 4/14(火) 01:00 出発 🛫</p>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">10:30</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Joe+Coffee+Bryant+Park+New+York" target="_blank" class="spot-link">Joe Coffee Bryant Park</a> で一回整える ☕</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-rose-50 p-3 rounded-xl shadow-sm border border-rose-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-rose-600 shrink-0">12:30</div>
+                <div>
+                  <p class="font-bold text-rose-800">食べ逃した本命1店 🥪</p>
+                  <p class="text-xs text-rose-700 mt-1">
+                    本命は <a href="https://www.google.com/maps/search/?api=1&query=Katz%27s+Delicatessen+New+York" target="_blank" class="font-bold underline text-rose-900">Katz's Delicatessen</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">午後</div>
+                <div><p class="font-bold text-slate-700">お土産・買い物・最後の散歩 🛍️</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
+                <div class="w-24 font-bold text-orange-600 shrink-0">18:00-19:00</div>
+                <div>
+                  <p class="font-bold text-orange-800">早め夜ごはん 🍔</p>
+                  <p class="text-xs text-orange-700 mt-1">
+                    本命は <a href="https://www.google.com/maps/search/?api=1&query=P.J.+Clarke%27s+Manhattan+West" target="_blank" class="font-bold underline text-orange-900">P.J. Clarke's Manhattan West</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">19:30-20:00</div>
+                <div><p class="font-bold text-slate-700">荷物回収</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">20:30ごろ</div>
+                <div><p class="font-bold text-slate-700">JFKへ出発 🚕</p></div>
+              </div>
+            </div>
+
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-slate-800 text-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-yellow-400 shrink-0">22:00目標</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport" target="_blank" class="spot-link !text-yellow-400">JFK到着</a> ✈️</p></div>
+              </div>
+            </div>
+            
+            <div class="relative pl-8">
+              <div class="mt-6 pt-6 border-t border-slate-200 text-center">
+                <p class="font-extrabold text-lg text-slate-700">翌 4/14(火) 01:00 出発 🛫</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -488,106 +703,262 @@
     </div>
 
     <!-- 代打リスト (BACKUP SPOTS) -->
-    <div id="backup" class="scroll-section glass-card rounded-2xl p-4 md:p-6 border border-slate-100 fade-in-up mt-12 scroll-mt-28">
-      <h2 class="text-lg md:text-2xl font-extrabold flex items-center gap-2 pb-2 md:pb-3 border-b border-slate-200 mb-3 md:mb-4">
+    <div id="backup" class="scroll-section glass-card rounded-2xl p-5 md:p-6 border border-slate-100 fade-in-up mt-12 scroll-mt-28">
+      <h2 class="text-xl md:text-2xl font-extrabold flex items-center gap-2 pb-3 border-b border-slate-200 mb-4 text-slate-800">
         🍽️ BACKUP SPOTS
       </h2>
-      <p class="text-xs md:text-sm text-slate-600 mb-4 md:mb-5 font-medium">時間が余った、混んでた時の代打！</p>
+      <p class="text-sm text-slate-600 mb-5 font-medium">時間が余った、混んでた時の代打！</p>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="spot-link text-sm md:text-base">Joe's Pizza</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">初日夜 / Day2夜</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=Joe%27s+Pizza+New+York" target="_blank" class="spot-link text-base">Joe's Pizza</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">初日夜の代打 / Day2夜の軽食</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="spot-link text-sm md:text-base">Junior's</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">初日夜 / Day3早め夜</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=Junior%27s+Restaurant+New+York" target="_blank" class="spot-link text-base">Junior's</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">初日夜の代打 / Day3早め夜ごはんの代打本命</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=Russ+%26+Daughters+New+York" target="_blank" class="spot-link text-sm md:text-base">Russ & Daughters</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Katz's混雑時の代打</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=Russ+%26+Daughters+New+York" target="_blank" class="spot-link text-base">Russ & Daughters</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Katz'sが重い・混みすぎた時の代打</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=L%27industrie+Pizzeria+West+Village+New+York" target="_blank" class="spot-link text-sm md:text-base">L'industrie Pizzeria</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Day3 West Village追加</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=L%27industrie+Pizzeria+West+Village+New+York" target="_blank" class="spot-link text-base">L'industrie Pizzeria</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Day3 West Village追加候補</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=Prince+Street+Pizza+New+York" target="_blank" class="spot-link text-sm md:text-base">Prince Street Pizza</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">SoHo側へ流れた時</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=Prince+Street+Pizza+New+York" target="_blank" class="spot-link text-base">Prince Street Pizza</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">SoHo側へ流れた時の代打</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=5+Napkin+Burger+New+York" target="_blank" class="spot-link text-sm md:text-base">5 Napkin Burger</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Midtownでちゃんと食べたい時</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=5+Napkin+Burger+New+York" target="_blank" class="spot-link text-base">5 Napkin Burger</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Midtownでちゃんと食べたい時の代打</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=La+Cabra+New+York" target="_blank" class="spot-link text-sm md:text-base">La Cabra</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">SoHo寄りのカフェ</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=La+Cabra+New+York" target="_blank" class="spot-link text-base">La Cabra</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">SoHo寄りになった時のカフェ代打</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm transition">
-          <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="spot-link text-sm md:text-base">Scarr's Pizza</a>
-          <p class="text-[11px] md:text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Lower Manhattanサク飯</p>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition">
+          <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="spot-link text-base">Scarr's Pizza</a>
+          <p class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 inline-block px-2 py-1 rounded">Lower Manhattanのサク飯代打</p>
         </div>
       </div>
     </div>
 
     <!-- メモ欄 -->
-    <div class="glass-card rounded-2xl p-4 md:p-5 border border-slate-100 fade-in-up mt-8 mb-4">
-      <h2 class="text-base md:text-lg font-bold flex items-center gap-2 mb-3">
+    <div class="glass-card rounded-2xl p-5 border border-slate-100 fade-in-up mt-8 mb-8">
+      <h2 class="text-lg font-bold flex items-center gap-2 mb-3">
         <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
         FREE MEMO
       </h2>
-      <!-- モバイルファーストの極意：文字サイズを必ず16px（text-base）に指定し、iOSのズームバグを防ぐ -->
-      <textarea id="trip-memo" class="w-full h-32 md:h-40 p-3 md:p-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none text-base text-slate-700 placeholder-slate-400 shadow-inner leading-relaxed" placeholder="現地で気になったことや買いたいものを自由にメモ...&#13;&#10;(※自動保存されます)"></textarea>
+      <textarea id="trip-memo" class="w-full h-40 p-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none text-sm font-medium text-slate-700 placeholder-slate-400 shadow-inner" placeholder="現地で気になったことや買いたいものを自由にメモ...&#13;&#10;(※この入力内容は自動で保存されます。タブを閉じても消えません)"></textarea>
+    </div>
+
+    <!-- 🔥 MISSIONS（出発前準備チェックリスト） -->
+    <div id="missions" class="scroll-section glass-card rounded-2xl p-5 md:p-6 border border-slate-100 fade-in-up mt-8 scroll-mt-28">
+      <h2 class="text-xl md:text-2xl font-extrabold flex items-center gap-2 pb-3 border-b-2 border-slate-100 mb-5 text-slate-800">
+        🔥 MISSIONS <span class="text-xs md:text-sm font-bold text-slate-500 ml-1 tracking-widest uppercase mt-1">出発前準備</span>
+      </h2>
+      <div class="space-y-3">
+        <!-- 準備項目 -->
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m1">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">ESTA申請＆承認確認ヨシ！（※出発72時間前までに）</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m2">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">eSIMの購入・設定準備完了！（現地で即ネット開通）</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m3">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">地下鉄(OMNY)用：Apple Payやタッチ決済クレカ設定OK！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m4">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">Googleマップの「NYオフラインマップ」DL完了！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m5">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">Uber / Lyft アプリ＆クレカ登録して設定OK！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m6">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">荷物預かり (Bounce) アプリ入れておく！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m7">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">Harbor Lights Cruise (4/9) 予約確認ヨシ！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m8">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">MET (4/10) チケット予約ヨシ！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m9">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">Gallaghers Steakhouse (4/10) 肉の予約は命！🔥</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m10">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">Empire State Building (4/10) チケット予約ヨシ！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m11">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">アラジン (4/11) 魔法のチケット確認！</span>
+        </label>
+
+        <label class="flex items-center p-3 md:p-4 bg-white rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 hover:shadow-md transition-all group">
+          <input type="checkbox" class="mission-cb sr-only peer" data-id="m12">
+          <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3 peer-checked:bg-red-500 peer-checked:border-red-500 transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="font-bold text-slate-700 peer-checked:text-slate-400 peer-checked:line-through transition-all select-none text-sm md:text-base">海外旅行保険 準備完了！</span>
+        </label>
+      </div>
     </div>
 
   </main>
 
-  <footer class="mt-8 text-center text-[10px] md:text-xs text-slate-400 pb-8">
+  <footer class="mt-12 text-center text-xs font-bold text-slate-400 pb-12">
     <p>HAVE A GREAT TRIP TO NEW YORK!</p>
   </footer>
 
+  <!-- 🚀 追加機能：スクロール連動ナビ ＆ 各種自動保存 -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. スクロール連動ナビ
+      
+      // ==========================================
+      // 1. スクロール連動ハイライト (Intersection Observer)
+      // ==========================================
       const sections = document.querySelectorAll('.scroll-section');
       const navLinks = document.querySelectorAll('.nav-link');
-      const observerOptions = { root: null, rootMargin: '-100px 0px -60% 0px', threshold: 0 };
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-120px 0px -60% 0px',
+        threshold: 0
+      };
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const currentId = entry.target.id;
+            
             navLinks.forEach(link => {
               const target = link.getAttribute('data-target');
-              link.classList.remove('bg-yellow-400', 'border-yellow-400', 'text-slate-900');
+              
+              // 一旦アクティブ用のクラスをすべて外して初期状態に戻す
+              link.classList.remove('bg-yellow-400', 'border-yellow-400', 'text-slate-900', 'bg-red-600', 'text-white', 'border-red-600');
+              
               if(target === 'backup') {
                 link.classList.add('bg-slate-800', 'text-white', 'border-slate-800');
+              } else if(target === 'missions') {
+                link.classList.add('bg-red-600', 'text-white', 'border-red-600');
               } else {
                 link.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
               }
+
+              // 今見ているセクションのボタンを黄色（アクティブ）にする
               if (target === currentId) {
-                if(target === 'backup') link.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
-                else link.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+                if(target === 'backup') {
+                  link.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
+                } else if(target === 'missions') {
+                  link.classList.remove('bg-red-600', 'text-white', 'border-red-600');
+                } else {
+                  link.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+                }
                 link.classList.add('bg-yellow-400', 'border-yellow-400', 'text-slate-900');
+                
+                // 横スクロールナビを自動で中央に持ってくる
                 link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
               }
             });
           }
         });
       }, observerOptions);
+
       sections.forEach(sec => observer.observe(sec));
 
-      // 2. メモ自動保存
+      // ==========================================
+      // 2. チェックリスト(MISSIONS)の自動保存機能
+      // ==========================================
+      const missionCheckboxes = document.querySelectorAll('.mission-cb');
+      const CB_STORAGE_KEY = 'nyTripMissions_2026';
+      const savedMissions = JSON.parse(localStorage.getItem(CB_STORAGE_KEY)) || {};
+
+      missionCheckboxes.forEach(cb => {
+        const id = cb.getAttribute('data-id');
+        // 保存データがあればチェックを入れる
+        if (savedMissions[id]) {
+          cb.checked = true;
+        }
+        // チェックのたびに保存
+        cb.addEventListener('change', (e) => {
+          savedMissions[id] = e.target.checked;
+          localStorage.setItem(CB_STORAGE_KEY, JSON.stringify(savedMissions));
+        });
+      });
+
+      // ==========================================
+      // 3. メモの自動保存機能 (localStorage)
+      // ==========================================
       const memoArea = document.getElementById('trip-memo');
-      const LOCAL_STORAGE_KEY = 'nyTripMemo_2026';
+      const MEMO_STORAGE_KEY = 'nyTripMemo_2026';
+
       if (memoArea) {
-        const savedText = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (savedText !== null) memoArea.value = savedText;
+        const savedText = localStorage.getItem(MEMO_STORAGE_KEY);
+        if (savedText !== null) {
+          memoArea.value = savedText;
+        }
         memoArea.addEventListener('input', (e) => {
-          localStorage.setItem(LOCAL_STORAGE_KEY, e.target.value);
+          localStorage.setItem(MEMO_STORAGE_KEY, e.target.value);
         });
       }
+      
     });
   </script>
+
 </body>
 </html>
