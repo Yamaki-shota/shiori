@@ -140,7 +140,6 @@
         <p class="text-sm text-slate-500 mb-4 font-medium">NY到着と少しだけタイムズスクエア</p>
         
         <div class="relative">
-          <!-- 路線図の縦線 -->
           <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
           
           <div class="space-y-3">
@@ -214,7 +213,7 @@
       <div id="day1" class="scroll-section relative pl-6 border-l-2 border-yellow-400 pb-2 scroll-mt-28">
         <div class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-[9px] top-1 border-4 border-slate-50"></div>
         <h3 class="text-xl font-bold text-slate-800">DAY 1 ｜ 4/9(木)</h3>
-        <p class="text-sm text-slate-500 mb-4 font-medium">Brooklyn Bridge → DUMBO → Lower Manhattan → Harbor Lights</p>
+        <p class="text-sm text-slate-500 mb-4 font-medium">DUMBO → Brooklyn Bridge → City Hall Park → 9/11 Memorial → Harbor Lights Cruise</p>
         
         <div class="relative">
           <div class="absolute left-[13px] top-6 bottom-4 w-[2px]" style="background: repeating-linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%); background-size: 2px 8px;"></div>
@@ -224,34 +223,21 @@
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
                 <div class="w-24 font-bold text-slate-500 shrink-0">08:00</div>
-                <div><p class="font-bold text-slate-700">ホテル出発</p></div>
+                <div>
+                  <p class="font-bold text-slate-700">ホテル出発</p>
+                  <p class="text-xs text-slate-500 mt-1">地下鉄でDUMBOへ移動 🚇</p>
+                </div>
               </div>
             </div>
 
+            <!-- DUMBO散策＆カフェ -->
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">08:30</div>
-                <div><p><a href="https://www.google.com/maps/search/?api=1&query=City+Hall+Park+New+York" target="_blank" class="spot-link">City Hall Park</a></p></div>
-              </div>
-            </div>
-
-            <div class="relative pl-8">
-              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
-              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">08:45-09:30</div>
-                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge" target="_blank" class="spot-link">Brooklyn Bridge</a> を歩く 🚶</p></div>
-              </div>
-            </div>
-
-            <!-- カフェ候補追加 -->
-            <div class="relative pl-8">
-              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
-              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">09:30-11:30</div>
+                <div class="w-24 font-bold text-slate-500 shrink-0">08:45-10:45</div>
                 <div>
                   <p><a href="https://www.google.com/maps/search/?api=1&query=DUMBO+Brooklyn" target="_blank" class="spot-link">DUMBO</a> 散策</p>
-                  <p class="text-xs text-slate-500 mt-1">カフェ候補: <a href="https://www.google.com/maps/search/?api=1&query=Devoci%C3%B3n+DUMBO+New+York" target="_blank" class="font-bold underline text-blue-600">Devoción DUMBO</a></p>
+                  <p class="text-xs text-slate-500 mt-1">カフェ候補: <a href="https://www.google.com/maps/search/?api=1&query=Devoci%C3%B3n+DUMBO+New+York" target="_blank" class="font-bold underline text-blue-600">Devoción DUMBO</a> ☕</p>
                 </div>
               </div>
             </div>
@@ -259,16 +245,28 @@
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">11:45</div>
-                <div><p class="font-bold text-slate-700">DUMBOで軽めランチ 🥪</p></div>
+                <div class="w-24 font-bold text-slate-500 shrink-0">11:00</div>
+                <div><p class="font-bold text-slate-700">DUMBOで早めランチ 🥪</p></div>
+              </div>
+            </div>
+
+            <!-- マンハッタン側へ渡る -->
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">12:00-12:45</div>
+                <div>
+                  <p><a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge" target="_blank" class="spot-link">Brooklyn Bridge</a> を歩く 🚶</p>
+                  <p class="text-xs text-slate-500 mt-1">ブルックリン側からマンハッタン側へ渡る絶景ルート！</p>
+                </div>
               </div>
             </div>
 
             <div class="relative pl-8">
-              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">13:00前後</div>
-                <div><p class="font-bold text-slate-700">NYC Ferryで <a href="https://www.google.com/maps/search/?api=1&query=Pier+11+Wall+St+New+York" target="_blank" class="spot-link">Pier 11</a> へ ⛴</p></div>
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:00</div>
+                <div><p><a href="https://www.google.com/maps/search/?api=1&query=City+Hall+Park+New+York" target="_blank" class="spot-link">City Hall Park</a></p></div>
               </div>
             </div>
 
@@ -294,7 +292,7 @@
                 <div class="w-24 font-bold text-slate-500 shrink-0">17:00以降</div>
                 <div>
                   <p class="font-bold text-emerald-700">フリータイム ☕</p>
-                  <p class="text-xs text-emerald-600 mt-1">小腹が空いたら <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="font-bold underline">Scarr's Pizza</a> を候補に。</p>
+                  <p class="text-xs text-emerald-600 mt-1">小腹が空いたら <a href="https://www.google.com/maps/search/?api=1&query=Scarr%27s+Pizza+New+York" target="_blank" class="font-bold underline text-emerald-800">Scarr's Pizza</a> を候補に。</p>
                 </div>
               </div>
             </div>
@@ -471,34 +469,28 @@
               </div>
             </div>
 
+            <!-- 南エリア散策 -->
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">08:00</div>
-                <div><p><a href="https://www.google.com/maps/search/?api=1&query=Arcane+Estate+Coffee+New+York" target="_blank" class="spot-link">Arcane Estate Coffee</a> ☕</p></div>
+                <div class="w-24 font-bold text-slate-500 shrink-0">09:00-11:00</div>
+                <div>
+                  <p class="font-bold text-slate-700">南エリア散策</p>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Arcane+Estate+Coffee+New+York" target="_blank" class="spot-link text-xs">Arcane Estate Coffee</a> ☕ ➡ 
+                    <a href="https://www.google.com/maps/search/?api=1&query=West+Village+New+York" target="_blank" class="spot-link text-xs">West Village</a> 散歩 ➡ 
+                    <a href="https://www.google.com/maps/search/?api=1&query=The+High+Line+New+York" target="_blank" class="spot-link text-xs">High Line</a> (Chelsea Marketへ向かう)
+                  </p>
+                  <p class="text-xs font-bold text-slate-400 mt-1">※ <a href="https://www.google.com/maps/search/?api=1&query=Little+Island+New+York" target="_blank" class="spot-link text-xs !text-slate-400">Little Island</a> は当日の流れで行けたら行く</p>
+                </div>
               </div>
             </div>
 
-            <div class="relative pl-8">
-              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-slate-300 border-2 border-[#f8fafc] z-10"></div>
-              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">09:00-10:00</div>
-                <div><p><a href="https://www.google.com/maps/search/?api=1&query=West+Village+New+York" target="_blank" class="spot-link">West Village</a> 散策</p></div>
-              </div>
-            </div>
-
-            <div class="relative pl-8">
-              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
-              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">10:15-11:30</div>
-                <div><p><a href="https://www.google.com/maps/search/?api=1&query=The+High+Line+New+York" target="_blank" class="spot-link !text-emerald-600">High Line</a> 🌿</p></div>
-              </div>
-            </div>
-
+            <!-- Chelsea Market -->
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-orange-400 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-orange-50 p-3 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition">
-                <div class="w-24 font-bold text-orange-600 shrink-0">11:30-12:30</div>
+                <div class="w-24 font-bold text-orange-600 shrink-0">11:15-12:30</div>
                 <div>
                   <p><a href="https://www.google.com/maps/search/?api=1&query=Chelsea+Market+New+York" target="_blank" class="spot-link !text-orange-800">Chelsea Market</a> でランチ</p>
                   <p class="text-xs font-bold text-orange-800 mt-1">本命は <a href="https://www.google.com/maps/search/?api=1&query=Los+Tacos+No.1+Chelsea+Market+New+York" target="_blank" class="underline">Los Tacos No.1</a> 🌮</p>
@@ -506,11 +498,27 @@
               </div>
             </div>
 
+            <!-- High Line 再開 -->
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="w-24 font-bold text-slate-500 shrink-0">13:00-14:00</div>
-                <div><p class="font-bold text-slate-700">元気があれば <a href="https://www.google.com/maps/search/?api=1&query=Little+Island+New+York" target="_blank" class="spot-link">Little Island</a></p></div>
+                <div class="w-24 font-bold text-slate-500 shrink-0">12:30〜</div>
+                <div>
+                  <p class="font-bold text-slate-700">High Line 北上スタート 🌿</p>
+                  <p class="text-xs text-slate-500 mt-1">Chelsea Market横から再びHigh Lineへ。</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Joe Coffee 休憩 -->
+            <div class="relative pl-8">
+              <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
+              <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
+                <div class="w-24 font-bold text-slate-500 shrink-0">13:00ごろ</div>
+                <div>
+                  <p class="font-bold text-slate-700">Joe Coffee で休憩！ ☕</p>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">23丁目で一度降りて、すぐ近くの <a href="https://www.google.com/maps/search/?api=1&query=Joe+Coffee+Company+Chelsea+New+York" target="_blank" class="spot-link text-xs">Joe Coffee Chelsea</a> へ。テイクアウトしてHigh Line北上再開🚶‍♂️</p>
+                </div>
               </div>
             </div>
 
@@ -652,7 +660,6 @@
               </div>
             </div>
 
-            <!-- コーヒー変更 -->
             <div class="relative pl-8">
               <div class="absolute left-[7px] top-[1.1rem] w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-[#f8fafc] z-10"></div>
               <div class="flex flex-col sm:flex-row sm:gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition">
